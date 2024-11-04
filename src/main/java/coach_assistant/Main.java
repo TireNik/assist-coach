@@ -3,6 +3,8 @@ package coach_assistant;
 import coach_assistant.model.Exercise;
 import coach_assistant.model.ExerciseType;
 import coach_assistant.workoutPlan.WorkoutDay;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
 import java.util.List;

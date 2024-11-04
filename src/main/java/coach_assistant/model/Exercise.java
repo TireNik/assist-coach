@@ -2,22 +2,48 @@ package coach_assistant.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Generated;
 
+
+@Data
+@ToString
+@EqualsAndHashCode
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Exercise {
-    private String name;
-    private ExerciseType type;
-    private List<Set> sets = new ArrayList();
+    String name;
+    ExerciseType type;
+    List<Set> sets = new ArrayList<>();  // Инициализация списка
 
     @JsonCreator
-    public Exercise(@JsonProperty("name") String name, @JsonProperty("type") ExerciseType type, @JsonProperty("sets") List<Set> sets) {
+    public Exercise(@JsonProperty("name") String name,
+                    @JsonProperty("type") ExerciseType type,
+                    @JsonProperty("sets") List<Set> sets) {
         this.name = name;
         this.type = type;
-        this.sets = (List)(sets != null ? sets : new ArrayList());
+        this.sets = sets != null ? sets : new ArrayList<>();
     }
 
     public void addSet(Double weight, Integer reps) {
-        this.sets.add(new Set(weight, reps));
+        sets.add(new Set(weight, reps));
     }
+
+    @Data
+    @ToString
+    @FieldDefaults(level = AccessLevel.PRIVATE)
+    public static class Set {
+        Double weight;
+        Integer reps;
+
+        @JsonCreator
+        public Set(@JsonProperty("weight") Double weight,
+                   @JsonProperty("reps") Integer reps) {
+            this.weight = weight;
+            this.reps = reps;
+        }
+    }
+}

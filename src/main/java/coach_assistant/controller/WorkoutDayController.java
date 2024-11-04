@@ -1,5 +1,8 @@
 package coach_assistant.controller;
 
+import coach_assistant.workoutPlan.WorkoutDay;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +12,6 @@ import java.util.Map;
 public class WorkoutDayController {
     private final Map<Long, WorkoutDay> workouts = new HashMap();
 
-    public WorkoutDayController() {
-    }
 
     @GetMapping
     public Collection<WorkoutDay> getWorkout() {
