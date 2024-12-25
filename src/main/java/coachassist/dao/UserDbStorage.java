@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Repository
-public class UserDbStorage {
+public class UserDbStorage  {
     public Collection<User> getUsers() {
         return List.of();
     }

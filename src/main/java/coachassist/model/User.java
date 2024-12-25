@@ -1,5 +1,6 @@
 package coachassist.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -11,16 +12,33 @@ import java.time.LocalDate;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
+@Table(name = "users")
 public class User {
-    Long id;
-    String name;
-    String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "email", unique = true)
+    private String email;
+
     @NotBlank
-    String login;
+    @Column(name = "login", nullable = false)
+    private String login;
+
     @NotBlank
-    String password;
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @NotNull
     @PastOrPresent
-    Integer registrationDate;
-    LocalDate birthday;
+    @Column(name = "registration_date", nullable = false)
+    private LocalDate registrationDate;
+
+    @Column(name = "birthday")
+    private LocalDate birthday;
+
 }

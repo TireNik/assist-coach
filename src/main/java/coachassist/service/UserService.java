@@ -1,33 +1,28 @@
 package coachassist.service;
 
-import coachassist.dao.UserDbStorage;
 import coachassist.model.User;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
 public class UserService {
-    private final UserDbStorage userDbStorage;
+    private final UserRepository userRepository;
 
-    public UserService(UserDbStorage userDbStorage) {
-        this.userDbStorage = userDbStorage;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public Collection<User> getUsers() {
-        return List.of();
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    public void addUser(User user) {
-
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 
-    public User getUserById(Long id) {
-        return null;
+    public long countUsersByUsername(String name) {
+        return userRepository.countByName(name);
     }
 
-    public User updateUser(User user) {
-        return null;
-    }
 }
