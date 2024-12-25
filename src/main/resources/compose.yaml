@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:16.1
+    container_name: postgres_new
+    ports:
+      - "6433:5432" # Внешний порт совпадает с портом контейнера
+    volumes:
+      - ./postgres:/var/lib/postgresql/data # Для сохранения данных
+    environment:
+      - POSTGRES_DB=assistance
+      - POSTGRES_USER=dbcoach
+      - POSTGRES_PASSWORD=12345
+    healthcheck:
+      test: pg_isready -q -d assist-coach -U dbcoach
+      interval: 5s
+      timeout: 5s
+      retries: 5
